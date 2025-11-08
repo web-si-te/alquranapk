@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Qur'an Digital Lengkap</title>
+    <style>
+        /* * =======================================================
+         * TAMPILAN BARU (DARK MODE) OLEH GEMINI
+         * =======================================================
+         */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            /* Latar belakang gelap */
+            background-color: #121212; 
+            /* Teks terang */
+            color: #e0e0e0; 
+            line-height: 1.6;
+        }
+        
+        header {
+            /* Gradient gelap baru */
+            background: linear-gradient(135deg, #232a34 0%, #1a1f26 100%); 
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            /* Bayangan lebih halus untuk mode gelap */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Pola lebih transparan */
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: cover;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            position: relative;
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-item {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+            /* Warna teks nav */
+            color: #d0d0d0; 
+        }
+        
+        .nav-item:hover {
+            /* Efek hover baru */
+            background-color: rgba(52, 152, 219, 0.1); 
+            color: #3498db;
+        }
+        
+        .nav-item.active {
+            /* Aksen baru (biru) */
+            background-color: #3498db; 
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Dashboard Menu */
+        .dashboard-menu {
+            /* Latar belakang kartu gelap */
+            background: #1e1e1e; 
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 1400px;
+            border-radius: 10px;
+            /* Bayangan baru */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            border: 1px solid #2c2c2c;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .dashboard-card {
+            /* Gradient kartu gelap */
+            background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%); 
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            /* Efek shadow hover baru */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-color: #3498db; 
+        }
+        
+        .dashboard-card i {
+            font-size: 2.5rem;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-card h3 {
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card p {
+            /* Teks lebih terang */
+            color: #aaa; 
+            font-size: 0.9rem;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            /* Latar belakang konten gelap */
+            background: #1e1e1e; 
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 1400px;
+            border-radius: 10px;
+            /* Bayangan baru */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            border: 1px solid #2c2c2c;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            /* Border gelap */
+            border-bottom: 1px solid #333; 
+        }
+        
+        .section-header h2 {
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            /* Teks lebih terang */
+            color: #aaa; 
+            font-size: 1.1rem;
+        }
+        
+        /* Prayer Times */
+        .prayer-times-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .prayer-time-card {
+            /* Latar belakang kartu gelap */
+            background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%); 
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .prayer-name {
+            font-weight: bold;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            margin-bottom: 0.5rem;
+        }
+        
+        .prayer-time {
+            font-size: 1.5rem;
+            /* Aksen baru (biru) */
+            color: #4ab1ff; 
+            font-weight: bold;
+        }
+        
+        .current-prayer {
+            /* Aksen baru (biru) */
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); 
+            color: white;
+        }
+        
+        .current-prayer .prayer-name,
+        .current-prayer .prayer-time {
+            color: white;
+        }
+        
+        /* Qibla Direction */
+        .qibla-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            /* Latar belakang gelap */
+            background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%); 
+            border-radius: 10px;
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .compass {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            position: relative;
+            /* Aksen baru (biru) */
+            border: 10px solid #2980b9; 
+            border-radius: 50%;
+            /* Latar belakang kompas */
+            background: #1e1e1e; 
+        }
+        
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: #e74c3c;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            transition: transform 1s ease;
+        }
+        
+        .compass-needle::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+        
+        .qibla-direction {
+            font-size: 1.2rem;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        /* Hadith List */
+        .hadith-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .hadith-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            /* Latar belakang item gelap */
+            background: #2a2a2a; 
+            /* Aksen baru (biru) */
+            border-left: 4px solid #3498db; 
+        }
+        
+        .hadith-arabic {
+            font-size: 1.4rem;
+            text-align: right;
+            margin-bottom: 1rem;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            line-height: 1.8;
+            /* Teks Arab lebih terang */
+            color: #f0f0f0; 
+        }
+        
+        .hadith-translation {
+            /* Teks terjemahan */
+            color: #ccc; 
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .hadith-reference {
+            font-size: 0.9rem;
+            /* Teks referensi */
+            color: #888; 
+            font-style: italic;
+        }
+        
+        /* History Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            /* Aksen baru (biru) */
+            background: #3498db; 
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            /* Latar belakang titik */
+            background: #1e1e1e; 
+            /* Aksen baru (biru) */
+            border: 4px solid #3498db; 
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            /* Latar belakang konten timeline */
+            background: #2a2a2a; 
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Duas List */
+        .duas-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .dua-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            /* Latar belakang item gelap */
+            background: #2a2a2a; 
+            /* Aksen baru (biru) */
+            border-left: 4px solid #3498db; 
+        }
+        
+        .dua-arabic {
+            font-size: 1.4rem;
+            text-align: right;
+            margin-bottom: 1rem;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            line-height: 1.8;
+            /* Teks Arab lebih terang */
+            color: #f0f0f0; 
+        }
+        
+        .dua-translation {
+            /* Teks terjemahan */
+            color: #ccc; 
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .dua-reference {
+            font-size: 0.9rem;
+            /* Teks referensi */
+            color: #888; 
+            font-style: italic;
+        }
+        
+        /* Discussions */
+        .discussions-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .discussion-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            /* Latar belakang item gelap */
+            background: #2a2a2a; 
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .discussion-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .discussion-title {
+            font-weight: bold;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            font-size: 1.1rem;
+        }
+        
+        .discussion-meta {
+            /* Teks meta */
+            color: #888; 
+            font-size: 0.9rem;
+        }
+        
+        .discussion-content {
+            /* Teks konten */
+            color: #ccc; 
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .discussion-replies {
+            /* Latar belakang balasan */
+            background: #1e1e1e; 
+            padding: 1rem;
+            border-radius: 8px;
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .reply-item {
+            padding: 0.5rem 0;
+            /* Border gelap */
+            border-bottom: 1px solid #333; 
+        }
+        
+        .reply-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            /* Latar belakang breadcrumb */
+            background-color: #252525; 
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            /* Teks breadcrumb */
+            color: #aaa; 
+            /* Border gelap */
+            border-bottom: 1px solid #333; 
+            display: none;
+        }
+        
+        .breadcrumb.active {
+            display: block;
+        }
+        
+        .breadcrumb a {
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb .separator {
+            margin: 0 0.5rem;
+            /* Warna separator */
+            color: #666; 
+        }
+        
+        .breadcrumb .current {
+            /* Teks breadcrumb saat ini */
+            color: #e0e0e0; 
+            font-weight: 500;
+        }
+        
+        /* Question Menu */
+        .question-menu {
+            display: none;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0 1.5rem;
+        }
+        
+        .question-menu.active {
+            display: flex;
+        }
+        
+        .question-label {
+            font-weight: 600;
+            margin-right: 1rem;
+            /* Warna label */
+            color: #e0e0e0; 
+        }
+        
+        .question-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .question-item {
+            padding: 0.5rem 1rem;
+            /* Latar belakang item */
+            background-color: #2a2a2a; 
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            /* Border gelap */
+            border: 1px solid #333; 
+        }
+        
+        .question-item:hover {
+            /* Latar belakang hover */
+            background-color: #333; 
+        }
+        
+        .question-item.active {
+            /* Aksen baru (biru) */
+            background-color: #3498db; 
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .search-section {
+            /* Latar belakang section */
+            background-color: #1e1e1e; 
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+            /* Border gelap */
+            border: 1px solid #2c2c2c; 
+            display: none;
+        }
+        
+        .search-section.active {
+            display: block;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            /* Border gelap */
+            border: 1px solid #444; 
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            /* Latar belakang & teks input */
+            background-color: #2a2a2a; 
+            color: #e0e0e0; 
+        }
+        
+        .search-box input:focus {
+            /* Aksen baru (biru) */
+            border-color: #3498db; 
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 14px 24px;
+            /* Aksen baru (biru) */
+            background: linear-gradient(to right, #3498db, #2980b9); 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-options select {
+            padding: 10px 15px;
+            /* Border gelap */
+            border: 1px solid #444; 
+            border-radius: 8px;
+            /* Latar belakang & teks select */
+            background-color: #2a2a2a; 
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .filter-options select:focus {
+            /* Aksen baru (biru) */
+            border-color: #3498db; 
+            outline: none;
+        }
+        
+        .content {
+            display: flex;
+            gap: 25px;
+            display: none;
+        }
+        
+        .content.active {
+            display: flex;
+        }
+        
+        .surah-list {
+            flex: 1;
+            /* Latar belakang list */
+            background-color: #1e1e1e; 
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            /* Border gelap */
+            border: 1px solid #2c2c2c; 
+            max-height: 700px;
+        }
+        
+        .surah-list h2 {
+            padding: 1.2rem;
+            /* Latar belakang header list */
+            background: linear-gradient(to right, #2a2a2a, #252525); 
+            /* Border gelap */
+            border-bottom: 1px solid #333; 
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            font-size: 1.3rem;
+        }
+        
+        .surah-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .surah-item {
+            padding: 1.2rem;
+            /* Border gelap */
+            border-bottom: 1px solid #2c2c2c; 
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .surah-item:hover {
+            /* Latar belakang hover */
+            background-color: #2a2a2a; 
+            transform: translateX(5px);
+        }
+        
+        .surah-item.active {
+            /* Latar belakang aktif (biru) */
+            background: linear-gradient(to right, #2980b9, #3498db); 
+            border-left: 5px solid #4ab1ff;
+        }
+        
+        .surah-item.active .surah-name,
+        .surah-item.active .surah-meta {
+            color: white; /* Teks putih saat aktif */
+        }
+        
+        .surah-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            /* Aksen baru (biru) */
+            background-color: #3498db; 
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .surah-item.active .surah-number {
+            background-color: white; /* Nomor saat aktif */
+            color: #2980b9;
+        }
+        
+        .surah-details {
+            flex: 1;
+        }
+        
+        .surah-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            /* Teks list */
+            color: #e0e0e0; 
+            font-size: 1.1rem;
+        }
+        
+        .surah-meta {
+            display: flex;
+            justify-content: space-between;
+            /* Teks meta */
+            color: #888; 
+            font-size: 0.9rem;
+        }
+        
+        .ayat-display {
+            flex: 2;
+            /* Latar belakang display */
+            background-color: #1e1e1e; 
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            max-height: 700px;
+            overflow-y: auto;
+            /* Border gelap */
+            border: 1px solid #2c2c2c; 
+        }
+        
+        .surah-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            /* Border gelap */
+            border-bottom: 1px solid #333; 
+            /* Latar belakang header */
+            background: linear-gradient(to right, #252525, #2a2a2a); 
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .surah-title {
+            font-size: 2rem;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            margin-bottom: 8px;
+        }
+        
+        .surah-arabic {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            /* Teks Arab */
+            color: #f0f0f0; 
+        }
+        
+        .surah-info {
+            /* Teks info */
+            color: #aaa; 
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            /* Latar belakang item info */
+            background-color: #2c2c2c; 
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .ayat-item {
+            margin-bottom: 1.8rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            /* Latar belakang ayat */
+            background-color: #2a2a2a; 
+            /* Aksen baru (biru) */
+            border-left: 4px solid #3498db; 
+            transition: all 0.3s;
+        }
+        
+        .ayat-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .ayat-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            /* Aksen baru (biru) */
+            background-color: #3498db; 
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .ayat-arabic {
+            font-size: 1.8rem;
+            text-align: right;
+            margin: 15px 0;
+            line-height: 2.2;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            direction: rtl;
+            /* Teks Arab */
+            color: #f0f0f0; 
+        }
+        
+        .ayat-latin {
+            /* Teks latin */
+            color: #bbb; 
+            margin: 10px 0;
+            font-style: italic;
+            line-height: 1.7;
+            padding: 10px;
+            /* Latar belakang latin */
+            background-color: #333; 
+            border-radius: 8px;
+            /* Border gelap */
+            border-left: 3px solid #444; 
+        }
+        
+        .ayat-translation {
+            /* Teks terjemahan */
+            color: #ccc; 
+            margin-top: 10px;
+            line-height: 1.7;
+            padding: 10px;
+            /* Latar belakang terjemahan */
+            background-color: #2a2a2a; 
+            border-radius: 8px;
+            /* Border gelap */
+            border-left: 3px solid #333; 
+        }
+        
+        .bismillah {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            /* Aksen baru (biru) */
+            color: #3498db; 
+            padding: 15px;
+            /* Latar belakang bismillah */
+            background: linear-gradient(to right, #2a2a2a, #252525); 
+            border-radius: 8px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            /* Teks loading */
+            color: #888; 
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            /* Teks footer */
+            color: #888; 
+            /* Border gelap */
+            border-top: 1px solid #2c2c2c; 
+            /* Latar belakang footer */
+            background-color: #1e1e1e; 
+        }
+        
+        @media (max-width: 992px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .surah-list, .ayat-display {
+                width: 100%;
+                max-height: none;
+            }
+            
+            .surah-container {
+                max-height: 400px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+            
+            .nav-item {
+                margin: 0.25rem;
+                padding: 0.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .surah-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .surah-title {
+                font-size: 1.6rem;
+            }
+            
+            .surah-arabic {
+                font-size: 1.5rem;
+            }
+            
+            .ayat-arabic {
+                font-size: 1.5rem;
+            }
+            
+            .question-menu {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .question-label {
+                margin-bottom: 0.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .prayer-times-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar styling (Dark) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #2a2a2a; /* Track gelap */
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #555; /* Thumb gelap */
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777; /* Thumb hover */
+        }
+        
+        .audio-player {
+            margin-top: 15px; /* Memberi jarak dari teks terjemahan */
+            width: 100%;
+            height: 40px; /* Membuat audio player lebih kompak */
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+        
+        .play-button {
+            /* Aksen baru (biru) */
+            background: #3498db; 
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .play-button:hover {
+            /* Aksen baru (biru) */
+            background: #2980b9; 
+        }
+        
+        /* * =======================================================
+         * Icons (SVG Fill diubah ke Aksen Biru #3498db)
+         * =======================================================
+         */
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        /* fill="%232c786c" -> fill="%233498db" */
+        .icon-quran { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>'); }
+        .icon-bookmark { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>'); }
+        .icon-prayer { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9l9.66.01zM8.54 12L2 12c0 3.86 1.69 7.31 4.38 9.67l5.62-9.73-3.46-6zM12 22c1.52 0 2.93-.44 4.13-1.18L12 14.27 7.87 20.82C9.07 21.56 10.48 22 12 22z"/></svg>'); }
+        .icon-hadith { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>'); }
+        .icon-history { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>'); }
+        .icon-dua { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>'); }
+        .icon-discussion { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>'); }
+        .icon-qibla { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'); }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Al-Qur'an Digital Lengkap</h1>
+        <p>Baca, pelajari, dan tadabburi Al-Qur'an dengan mudah</p>
+        
+        <div class="nav-menu">
+            <div class="nav-item active" data-target="dashboard">Dashboard</div>
+            <div class="nav-item" data-target="quran">Qur'an</div>
+            <div class="nav-item" data-target="hadith">Hadist</div>
+            <div class="nav-item" data-target="history">History</div>
+            <div class="nav-item" data-target="duas">Doa harian</div>
+        </div>
+    </header>
+    
+    <div class="dashboard-menu content-section active" id="dashboard">
+        <h2>Dashboard Al-Qur'an Digital</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card" onclick="showSection('quran')">
+                <div class="icon icon-quran"></div>
+                <h3>Baca Qur'an</h3>
+                <p>Baca dan pelajari Al-Qur'an dengan terjemahan lengkap</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('prayer-times')">
+                <div class="icon icon-prayer"></div>
+                <h3>Jadwal Sholat</h3>
+                <p>Jadwal sholat dan waktu-waktu mustajab untuk berdoa</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('qibla')">
+                <div class="icon icon-qibla"></div>
+                <h3>Arah Qiblat</h3>
+                <p>Penunjuk arah kiblat berdasarkan lokasi Anda</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('Hadist')">
+                <div class="icon icon-hadith"></div>
+                <h3>Kumpulan Hadith</h3>
+                <p>Hadith-hadith shahih dari Rasulullah SAW</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('history')">
+                <div class="icon icon-history"></div>
+                <h3>Sejarah Islam</h3>
+                <p>Perjalanan sejarah Islam dari masa ke masa</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('duas')">
+                <div class="icon icon-dua"></div>
+                <h3>Doa-doa Harian</h3>
+                <p>Kumpulan doa dari Al-Qur'an dan Hadith</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('discussions')">
+                <div class="icon icon-discussion"></div>
+                <h3>Diskusi</h3>
+                <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('bookmarks')">
+                <div class="icon icon-bookmark"></div>
+                <h3>Bookmarks</h3>
+                <p>Ayat-ayat yang telah Anda tandai untuk dibaca kembali</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section" id="quran">
+        <div class="breadcrumb active">
+            <a href="#">Home</a>
+            <span class="separator">→</span>
+            <a href="#">Al-Qur'an</a>
+            <span class="separator">→</span>
+            <span class="current" id="breadcrumb-surah">Pilih Surah</span>
+        </div>
+        
+        <div class="question-menu active">
+            <div class="question-label">Question</div>
+            <div class="question-nav">
+                <div class="question-item active">Qur'an</div>
+                <div class="question-item">Translation (Compare)</div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <section class="search-section active">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Cari surah atau ayat...">
+                    <button id="search-button">Cari</button>
+                </div>
+                <div class="filter-options">
+                    <select id="sort-by">
+                        <option value="number">Urut berdasarkan nomor</option>
+                        <option value="name">Urut berdasarkan nama</option>
+                        <option value="revelation">Urut berdasarkan turunnya</option>
+                    </select>
+                    <select id="verse-count">
+                        <option value="all">Semua ayat</option>
+                        <option value="10">10 ayat pertama</option>
+                        <option value="20">20 ayat pertama</option>
+                    </select>
+                </div>
+            </section>
+            
+            <section class="content active">
+                <div class="surah-list">
+                    <h2>Daftar Surah (114)</h2>
+                    <div class="surah-container" id="surah-container">
+                        </div>
+                </div>
+                
+                <div class="ayat-display">
+                    <div class="surah-header">
+                        <h2 class="surah-title" id="current-surah">Pilih Surah</h2>
+                        <div class="surah-arabic" id="surah-arabic"></div>
+                        <div class="surah-info" id="surah-info">
+                            <span class="info-item" id="surah-type">Klik pada nama surah untuk menampilkan ayat-ayatnya</span>
+                        </div>
+                    </div>
+                    <div id="ayat-container">
+                        </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div class="content-section" id="prayer-times">
+        <div class="section-header">
+            <h2>Jadwal Sholat</h2>
+            <p>Jadwal sholat untuk lokasi Anda hari ini</p>
+        </div>
+        
+        <div class="prayer-times-container" id="prayer-times-container">
+            </div>
+        
+        <div class="qibla-container">
+            <h3>Arah Qiblat</h3>
+            <div class="compass">
+                <div class="compass-needle" id="qibla-needle"></div>
+            </div>
+            <div class="qibla-direction" id="qibla-direction">Mengambil arah kiblat...</div>
+            <button onclick="findQibla()" class="play-button" style="margin-top: 1rem;">Cari Arah Kiblat</button>
+        </div>
+    </div>
+    
+    <div class="content-section" id="hadith">
+        <div class="section-header">
+            <h2>Kumpulan Hadith</h2>
+            <p>Hadith-hadith shahih dari Rasulullah SAW</p>
+        </div>
+        
+        <div class="hadith-list" id="hadith-list">
+            </div>
+    </div>
+    
+    <div class="content-section" id="history">
+        <div class="section-header">
+            <h2>Sejarah Islam</h2>
+            <p>Perjalanan sejarah Islam dari masa ke masa</p>
+        </div>
+        
+        <div class="timeline" id="history-timeline">
+            </div>
+    </div>
+    
+    <div class="content-section" id="duas">
+        <div class="section-header">
+            <h2>Doa-doa Harian</h2>
+            <p>Kumpulan doa dari Al-Qur'an dan Hadith untuk berbagai keperluan</p>
+        </div>
+        
+        <div class="duas-list" id="duas-list">
+            </div>
+    </div>
+    
+    <div class="content-section" id="discussions">
+        <div class="section-header">
+            <h2>Diskusi Islami</h2>
+            <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
+        </div>
+        
+        <div class="discussions-list" id="discussions-list">
+            </div>
+    </div>
+    
+    <footer>
+        <p>Al-Qur'an Digital Lengkap &copy; 2023 - Dibuat untuk kemudahan membaca dan mempelajari Al-Qur'an</p>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // API Quran (TIDAK DIUBAH)
+            const API_BASE_URL = "https://equran.id/api/v2";
+
+            // Fungsi untuk menampilkan daftar surah dari API (TIDAK DIUBAH)
+            async function loadSurahListFromAPI() {
+                const container = document.getElementById('surah-container');
+                container.innerHTML = '<div class="loading" style="color: #888; padding: 2rem;">Memuat daftar surah...</div>';
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/surat`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const json = await response.json();
+                    
+                    if (!json.data || json.data.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat data surah.</p>';
+                        return;
+                    }
+
+                    container.innerHTML = ''; // Kosongkan loading
+                    
+                    json.data.forEach(surah => {
+                        const surahItem = document.createElement('div');
+                        surahItem.className = 'surah-item';
+                        surahItem.innerHTML = `
+                            <div class="surah-number">${surah.nomor}</div>
+                            <div class="surah-details">
+                                <div class="surah-name">${surah.namaLatin} (${surah.arti})</div>
+                                <div class="surah-meta">
+                                    <span>${surah.nama}</span>
+                                    <span>${surah.jumlahAyat} ayat • ${surah.tempatTurun}</span>
+                                </div>
+                            </div>
+                        `;
+                        
+                        surahItem.addEventListener('click', () => {
+                            document.querySelectorAll('.surah-item').forEach(item => {
+                                item.classList.remove('active');
+                            });
+                            surahItem.classList.add('active');
+                            
+                            document.getElementById('breadcrumb-surah').textContent = `${surah.nomor}. ${surah.namaLatin} ▼`;
+                            
+                            displayAyatFromAPI(surah);
+                        });
+                        
+                        container.appendChild(surahItem);
+                    });
+
+                } catch (error) {
+                    console.error("Fetch Error:", error);
+                    if (error.message.includes('Failed to fetch')) {
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 2rem; color: #f8d7da; background-color: #721c24; border: 1px solid #f5c6cb; border-radius: 8px;">
+                                <strong>Gagal Mengambil Data (Error CORS)</strong>
+                                <p style="font-size: 0.9rem; color: #f5c6cb; margin-top: 10px;">
+                                    Browser memblokir permintaan ke API. Ini adalah batasan keamanan server API, bukan kesalahan kode.
+                                    Untuk testing, Anda mungkin perlu menggunakan ekstensi browser "CORS Unblock".
+                                </p>
+                            </div>`;
+                    } else {
+                         container.innerHTML = `<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat daftar surah. Error: ${error.message}</p>`;
+                    }
+                }
+            }
+
+            // Fungsi untuk menampilkan ayat-ayat surah dari API (TIDAK DIUBAH)
+            async function displayAyatFromAPI(surah) {
+                const surahTitle = document.getElementById('current-surah');
+                const surahArabic = document.getElementById('surah-arabic');
+                const surahInfo = document.getElementById('surah-info');
+                const ayatContainer = document.getElementById('ayat-container');
+                
+                surahTitle.textContent = `${surah.nomor}. ${surah.namaLatin} (${surah.arti})`;
+                surahArabic.textContent = surah.nama;
+                surahInfo.innerHTML = `
+                    <span class="info-item">${surah.jumlahAyat} Ayat</span>
+                    <span class="info-item">${surah.tempatTurun}</span>
+                    <span class="info-item">Surah ${surah.nomor}</span>
+                `;
+                
+                ayatContainer.innerHTML = '<div class="loading" style="color: #888; padding: 2rem;">Memuat ayat...</div>';
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/surat/${surah.nomor}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const json = await response.json();
+                    
+                    if (!json.data || !json.data.ayat || json.data.ayat.length === 0) {
+                         ayatContainer.innerHTML = '<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat data ayat.</p>';
+                         return;
+                    }
+
+                    ayatContainer.innerHTML = ''; // Kosongkan loading
+                    
+                    if (surah.nomor !== 9 && surah.nomor !== 1) {
+                        const bismillah = document.createElement('div');
+                        bismillah.className = 'bismillah';
+                        bismillah.textContent = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                        ayatContainer.appendChild(bismillah);
+                    }
+                    
+                    json.data.ayat.forEach(ayat => {
+                        const ayatItem = document.createElement('div');
+                        ayatItem.className = 'ayat-item';
+                        const audioUrl = ayat.audio[Object.keys(ayat.audio)[0]]; 
+                        
+                        ayatItem.innerHTML = `
+                            <div>
+                                <span class="ayat-number">${ayat.nomorAyat}</span>
+                            </div>
+                            <div class="ayat-arabic">${ayat.teksArab}</div>
+                            <div class="ayat-latin">${ayat.teksLatin}</div>
+                            <div class="ayat-translation">${ayat.teksIndonesia}</div>
+                            <audio controls class="audio-player">
+                                <source src="${audioUrl}" type="audio/mpeg">
+                                Browser Anda tidak mendukung elemen audio.
+                            </audio>
+                        `;
+                        ayatContainer.appendChild(ayatItem);
+                    });
+
+                } catch (error) {
+                    console.error("Fetch Error:", error);
+                    ayatContainer.innerHTML = `<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat ayat. Error: ${error.message}</p>`;
+                }
+            }
+
+            // --- Penanganan Fitur Lain (YANG DIPERBARUI) ---
+            
+            function showNotAvailable(containerId) {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = `<p style="text-align: center; padding: 3rem; color: #888;">
+                        Fitur ini sedang dalam pengembangan.
+                    </p>`;
+                }
+            }
+
+            // --- FUNGSI BARU UNTUK JADWAL SHOLAT ---
+            async function loadPrayerTimes() {
+                const container = document.getElementById('prayer-times-container');
+                container.innerHTML = '<div class="loading" style="color: #888; padding: 2rem;">Memuat jadwal sholat...</div>';
+
+                try {
+                    // Menggunakan API Al-Adhan. Lokasi di-hardcode ke Bogor (sesuai lokasi Anda)
+                    // Method=2 adalah Kemenag
+                    const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Bogor&country=Indonesia&method=2');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const json = await response.json();
+                    
+                    if (!json.data || !json.data.timings) {
+                        throw new Error('Format data tidak sesuai');
+                    }
+
+                    const timings = json.data.timings;
+                    const prayerOrder = [
+                        { name: "Subuh", time: timings.Fajr },
+                        { name: "Syuruq", time: timings.Sunrise },
+                        { name: "Dzuhur", time: timings.Dhuhr },
+                        { name: "Ashar", time: timings.Asr },
+                        { name: "Maghrib", time: timings.Maghrib },
+                        { name: "Isya", time: timings.Isha }
+                    ];
+
+                    container.innerHTML = ''; // Kosongkan loading
+
+                    prayerOrder.forEach(prayer => {
+                        const prayerCard = document.createElement('div');
+                        prayerCard.className = 'prayer-time-card';
+                        prayerCard.innerHTML = `
+                            <div class="prayer-name">${prayer.name}</div>
+                            <div class="prayer-time">${prayer.time}</div>
+                        `;
+                        container.appendChild(prayerCard);
+                    });
+
+                } catch (error) {
+                    console.error("Fetch Error (Prayer Times):", error);
+                    container.innerHTML = `<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat jadwal sholat. Error: ${error.message}</p>`;
+                }
+            }
+
+            // --- FUNGSI BARU UNTUK HADIST ---
+            async function loadHadith() {
+                const container = document.getElementById('hadith-list');
+                container.innerHTML = '<div class="loading" style="color: #888; padding: 2rem;">Memuat hadits...</div>';
+
+                try {
+                    // Menggunakan API Hadits (Contoh: 20 hadits Bukhari)
+                    const response = await fetch('https://hadits-api-id.vercel.app/hadith/bukhari?page=1&limit=20'); // <-- INI BENAR
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const json = await response.json();
+                    
+                    if (!json.data || !json.data.items || json.data.items.length === 0) {
+                        throw new Error('Format data hadits tidak sesuai');
+                    }
+                    
+                    container.innerHTML = ''; // Kosongkan loading
+
+                    json.data.items.forEach(hadith => {
+                        const hadithItem = document.createElement('div');
+                        hadithItem.className = 'hadith-item';
+                        hadithItem.innerHTML = `
+                            <div class="hadith-arabic">${hadith.arab}</div>
+                            <div class="hadith-translation">${hadith.id}</div>
+                            <div class="hadith-reference">HR. Bukhari No. ${hadith.number}</div>
+                        `;
+                        container.appendChild(hadithItem);
+                    });
+
+                } catch (error) {
+                    console.error("Fetch Error (Hadith):", error);
+                    container.innerHTML = `<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat hadits. Error: ${error.message}</p>`;
+                }
+            }
+
+            // --- FUNGSI BARU UNTUK DOA HARIAN ---
+            async function loadDuas() {
+                const container = document.getElementById('duas-list');
+                container.innerHTML = '<div class="loading" style="color: #888; padding: 2rem;">Memuat doa-doa...</div>';
+
+                try {
+                    // Menggunakan API Doa Harian
+                    const response = await fetch('https://doa-harian-api-id.vercel.app/api');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const json = await response.json();
+
+                    if (!json.data || json.data.length === 0) {
+                        throw new Error('Format data doa tidak sesuai');
+                    }
+
+                    container.innerHTML = ''; // Kosongkan loading
+
+                    json.data.forEach(dua => {
+                        const duaItem = document.createElement('div');
+                        duaItem.className = 'dua-item';
+                        duaItem.innerHTML = `
+                            <div class="dua-arabic">${dua.arab}</div>
+                            <div class="dua-translation">${dua.latin}</div>
+                            <div class="dua-translation" style="color: #e0e0e0; margin-top: 10px;"><b>Artinya:</b> ${dua.translation}</div>
+                            <div class="dua-reference">${dua.title}</div>
+                        `;
+                        container.appendChild(duaItem);
+                    });
+
+                } catch (error) {
+                    console.error("Fetch Error (Duas):", error);
+                    container.innerHTML = `<p style="text-align: center; padding: 2rem; color: #f00;">Gagal memuat doa-doa. Error: ${error.message}</p>`;
+                }
+            }
+
+            // Fungsi ini bisa dibiarkan, karena API-nya tidak diminta
+            function loadHistory() { showNotAvailable('history-timeline'); }
+            function loadDiscussions() { showNotAvailable('discussions-list'); }
+
+            // --- Fungsi Bantuan & Event Listener (Sebagian besar sama) ---
+
+            function findQibla() {
+                const needle = document.getElementById('qibla-needle');
+                const direction = document.getElementById('qibla-direction');
+                const qiblaDirection = 292; // Simulasi
+                needle.style.transform = `translate(-50%, -100%) rotate(${qiblaDirection}deg)`;
+                direction.textContent = `Arah Kiblat: ${qiblaDirection}° dari Utara`;
+            }
+
+            function searchSurah() {
+                const searchInput = document.getElementById('search-input').value.toLowerCase();
+                const surahItems = document.querySelectorAll('.surah-item');
+                
+                surahItems.forEach(item => {
+                    const surahName = item.querySelector('.surah-name').textContent.toLowerCase();
+                    if (surahName.includes(searchInput)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            document.getElementById('search-button').addEventListener('click', searchSurah);
+            document.getElementById('search-input').addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    searchSurah();
+                }
+            });
+
+            document.getElementById('sort-by').addEventListener('change', function() {
+                alert('Fitur pengurutan belum diimplementasikan untuk data API.');
+            });
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const target = this.getAttribute('data-target');
+                    showSection(target);
+                });
+            });
+
+            document.querySelectorAll('.question-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.question-item').forEach(q => {
+                        q.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
+            function showSection(section) {
+                document.querySelectorAll('.content-section').forEach(sec => {
+                    sec.classList.remove('active');
+                });
+                
+                const activeSection = document.getElementById(section);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+                
+                if (section === 'quran') {
+                    document.querySelector('.breadcrumb').classList.add('active');
+                    document.querySelector('.question-menu').classList.add('active');
+                    document.querySelector('.search-section').classList.add('active');
+                    document.querySelector('.content').classList.add('active');
+                } else {
+                    document.querySelector('.breadcrumb').classList.remove('active');
+                    document.querySelector('.question-menu').classList.remove('active');
+                    document.querySelector('.search-section').classList.remove('active');
+                    document.querySelector('.content').classList.remove('active');
+                }
+                
+                // Load data untuk section tertentu (jika ada)
+                // INI BAGIAN YANG PENTING: Memanggil fungsi-fungsi baru
+                if (section === 'prayer-times') { loadPrayerTimes(); }
+                else if (section === 'hadith') { loadHadith(); } // 'hadith' harus sesuai dengan data-target di HTML
+                else if (section === 'history') { loadHistory(); }
+                else if (section === 'duas') { loadDuas(); }
+                else if (section === 'discussions') { loadDiscussions(); }
+            }
+
+            // Inisialisasi aplikasi
+            showSection('dashboard');
+            
+            // Muat daftar surah saat halaman pertama kali dibuka
+            loadSurahListFromAPI();
+
+        });
+    </script>
+
+</body>
+</html>
